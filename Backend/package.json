@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"nodemon src/server.js",
-    "start":"node src/server.js"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +18,8 @@
     "mongoose": "^9.10.1",
     "mqtt": "^5.16.0",
     "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

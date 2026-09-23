@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 
 const connectDatabase = require("./config/database");
+const mqttClient = require("./mqtt/client");
+const telemetryRouter = require("./routes/telemetry");
 
 const app =express();
 
@@ -18,6 +20,7 @@ app.get ("/health",(req,res)=>{
     });
 });
 
+app.use("/api/telemetry",telemetryRouter);
 
 const PORT = process.env.PORT||4000;
 
