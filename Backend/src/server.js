@@ -5,6 +5,8 @@ const cors = require("cors");
 
 const connectDatabase = require("./config/database");
 const mqttClient = require("./mqtt/client");
+
+const { createWebSocketServer } = require("./websockets/server");
 const telemetryRouter = require("./routes/telemetry");
 
 const app =express();
@@ -28,9 +30,13 @@ async function startServer(){
     try{
         await connectDatabase();
 
-        app.listen(PORT,()=>{
-            console.log(`Backend running on http:localhost:${PORT}`);
+        const server = app.listen(PORT,()=>{
+            console.log(`Backend running on http://localhost:${PORT}`);
         });
+
+        createWebSocketServer(server);
+
+        console.log(`WebSocket server running on ws://localhost:${PORT}/ws`);
     } catch (error){
         console.error("failed to start server:",error.message);
         process.exit(1);

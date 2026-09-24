@@ -1,4 +1,5 @@
 const mqtt = require ("mqtt");
+const {broadcast} = require("../websockets/server");
 const Telemetry = require("../models/telemetry");
 const brokerUrl =process.env.MQTT_BROKER_URL ||
 "mqtt://localhost:1883";
@@ -33,6 +34,11 @@ mqttClient.on("message",async(topic,message)=>{
             ts:data.ts || Date.now()
         });
         console.log("Telemetry saved to MongoDB:", savedTelemetry._id);
+
+        broadcast({
+            type:"telemetry",
+            data:savedTelemetry.toObject()
+        });
     }catch(error){
         console.error("invalid MQTT message:",error.message);
     }

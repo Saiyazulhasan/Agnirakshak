@@ -14,6 +14,7 @@ router.get("/latest", async (req, res) => {
         )
     );
     res.json(readings.filter(Boolean));
+    
     } catch (error) {
         console.error("Failed to fetch telemetry:", error.message);
         res.status(500).json({

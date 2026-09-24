@@ -1,4 +1,4 @@
-const mongoose =require("mongoose");
+const mongoose = require("mongoose");
 
 const telemetrySchema = new
 mongoose.Schema(
@@ -30,4 +30,7 @@ mongoose.Schema(
         timestamp: true
     }
 );
-module.exports =mongoose.model("Telemetry",telemetrySchema);
+const Telemetry = mongoose.models.Telemetry ||mongoose.model("Telemetry",telemetrySchema);
+
+
+module.exports = Telemetry;
